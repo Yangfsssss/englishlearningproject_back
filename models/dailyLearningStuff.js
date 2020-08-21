@@ -2,13 +2,9 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const dailyLearningStuffSchema = mongoose.Schema({
-  memo: {
-    type: String
-    // required: true
-  },
-  url: {
-    type: String
-  }
+  date: String,
+  memo: String,
+  url: String
 });
 
 dailyLearningStuffSchema.set("toJSON", {

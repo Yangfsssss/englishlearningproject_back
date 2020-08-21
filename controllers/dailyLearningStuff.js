@@ -12,6 +12,7 @@ dailyLearningStuffRouter.post("/", async (req, res) => {
   const body = req.body;
 
   const stuff = new DailyLearningStuff({
+    date: body.date,
     memo: body.memo,
     url: body.url
   });
