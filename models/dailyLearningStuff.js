@@ -3,8 +3,12 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const dailyLearningStuffSchema = mongoose.Schema({
   date: String,
-  memo: String,
-  url: String
+  items: [
+    {
+      memo: String,
+      url: String
+    }
+  ]
 });
 
 dailyLearningStuffSchema.set("toJSON", {
