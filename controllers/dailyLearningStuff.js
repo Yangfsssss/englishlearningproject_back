@@ -24,7 +24,12 @@ dailyLearningStuffRouter.post("/", async (req, res) => {
       { new: true }
     );
 
-    res.json(updatedStuff.toJSON());
+    const TagedStuff = {
+      ...updatedStuff.toJSON(),
+      wasUpdated: true
+    };
+
+    res.json(TagedStuff);
   } else {
     const newstuff = new DailyLearningStuff({
       date: body.date,

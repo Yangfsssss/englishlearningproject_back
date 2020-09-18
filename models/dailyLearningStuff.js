@@ -8,7 +8,8 @@ const dailyLearningStuffSchema = mongoose.Schema({
       memo: String,
       url: String
     }
-  ]
+  ],
+  wasUpdated: Boolean
 });
 
 dailyLearningStuffSchema.set("toJSON", {
