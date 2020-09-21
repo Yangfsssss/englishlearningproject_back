@@ -2,8 +2,17 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const sectionSchema = new mongoose.Schema({
-  url: String,
-  words: Array
+  date: String,
+  items: {
+    type: Array,
+    title: String,
+    url: String,
+    wordUnits: {
+      type: Array,
+      word: String,
+      translation: String
+    }
+  }
 });
 
 sectionSchema.set("toJSON", {

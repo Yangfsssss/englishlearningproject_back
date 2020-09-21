@@ -1,22 +1,29 @@
-const sectionsRouter = require('express').Router()
-const jwt = require('jsonwebtoken')
-const Section = require('../models/section')
+const sectionsRouter = require("express").Router();
+// const jwt = require("jsonwebtoken");
+const Section = require("../models/section");
 
-sectionsRouter.get('/', async (req, res) => {
-  const sections = await Section.find({})
-  res.json(sections.map((section) => section.toJSON()))
-})
+sectionsRouter.get("/", async (req, res) => {
+  const sections = await Section.find({});
+  res.json(sections.map((section) => section.toJSON()));
+});
 
-sectionsRouter.post('/', async (req, res) => {
-  const body = req.body
+sectionsRouter.post("/", async (req, res) => {
+  const body = req.body;
+  console.log(body);
 
   const section = new Section({
-    url: body.url,
-    words: body.words,
-  })
+    date: body.date,
+    items: {
+      title: body.items.title,
+      url: body.items.url,
+      wordUnits: body.items.wordUnits
+    }
+  });
 
-  const savedSection = await section.save()
-  res.json(savedSection.toJSON())
-})
+  console.log(section);
 
-module.exports = sectionsRouter
+  const savedSection = await section.save();
+  res.json(savedSection.toJSON());
+});
+
+module.exports = sectionsRouter;
