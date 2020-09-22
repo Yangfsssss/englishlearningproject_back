@@ -45,19 +45,13 @@ dailyLearningStuffRouter.post("/", async (req, res) => {
 
 dailyLearningStuffRouter.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
-  console.log(req.body);
 
-  // const recordUnitId = body.recordUnitId
-  // const itemId = body.itemId
+  const recordUnit = await DailyLearningStuff.findOne({ "items._id": id });
 
-  // const recordUnit = await DailyLearningStuff.find({recordUnitId})
-  // const item =
+  await recordUnit.items.id(id).remove();
+  await recordUnit.save();
 
-  const deleteMessage = await DailyLearningStuff.deleteOne({ _id: id });
-  console.log(deleteMessage);
-
-  res.send(deleteMessage);
+  res.send("Deleted!");
 });
 
 module.exports = dailyLearningStuffRouter;

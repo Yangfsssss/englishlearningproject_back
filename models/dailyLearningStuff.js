@@ -1,27 +1,30 @@
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const dailyLearningStuffSchema = mongoose.Schema({
   date: String,
   items: [
     {
       memo: String,
-      url: String,
-    },
+      url: String
+    }
   ],
-  wasUpdated: Boolean,
-})
+  wasUpdated: Boolean
+});
 
-dailyLearningStuffSchema.set('toJSON', {
+dailyLearningStuffSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  },
-})
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  }
+});
 
-dailyLearningStuffSchema.plugin(uniqueValidator)
+dailyLearningStuffSchema.plugin(uniqueValidator);
 
-const DailyLearningStuff = mongoose.model('DailyLearningStuff', dailyLearningStuffSchema)
+const DailyLearningStuff = mongoose.model(
+  "DailyLearningStuff",
+  dailyLearningStuffSchema
+);
 
-module.exports = DailyLearningStuff
+module.exports = DailyLearningStuff;
