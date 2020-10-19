@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const dailyLearningStuffSchema = mongoose.Schema({
+const dailyLearningStuffSchema = new mongoose.Schema({
   date: String,
   items: [
     {

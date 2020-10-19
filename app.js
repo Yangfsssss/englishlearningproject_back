@@ -5,6 +5,7 @@ require("express-async-errors");
 
 const app = express();
 
+const QAUnitRouter = require("./controllers/QAUnit");
 const sectionsRouter = require("./controllers/sections");
 const dailyLearningStuffRouter = require("./controllers/dailyLearningStuff");
 
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(cors());
 app.use(middleware.requestLogger);
 
+app.use("/api/basic", QAUnitRouter);
 app.use("/api/sections", sectionsRouter);
 app.use("/api/dailylearningstuff", dailyLearningStuffRouter);
 
