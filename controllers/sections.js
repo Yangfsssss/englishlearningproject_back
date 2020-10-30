@@ -1,6 +1,7 @@
 const sectionsRouter = require("express").Router();
 // const jwt = require("jsonwebtoken");
 const Section = require("../models/section");
+const User = require("../models/user");
 
 sectionsRouter.get("/", async (req, res) => {
   const sections = await Section.find({});
@@ -9,7 +10,8 @@ sectionsRouter.get("/", async (req, res) => {
 
 sectionsRouter.post("/", async (req, res) => {
   const body = req.body;
-  console.log(body);
+
+  const user = await User.findById(body.userId);
 
   const section = new Section({
     date: body.date,
@@ -17,12 +19,14 @@ sectionsRouter.post("/", async (req, res) => {
       title: body.items.title,
       url: body.items.url,
       wordUnits: body.items.wordUnits
-    }
+    },
+    user: user._id
   });
 
-  console.log(section);
-
   const savedSection = await section.save();
+  user.sections = user.sections.comcat(savedSection._id);
+  await user.save();
+
   res.json(savedSection.toJSON());
 });
 
