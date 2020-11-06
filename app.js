@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cors());
 app.use(middleware.requestLogger);
 
-// app.use("/api/login", loginRouter);
+app.use("/api/login", loginRouter);
 app.use("/api/user", userRouter);
 app.use("/api/basic", QAUnitRouter);
 app.use("/api/sections", sectionsRouter);

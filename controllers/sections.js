@@ -11,7 +11,7 @@ sectionsRouter.get("/", async (req, res) => {
 sectionsRouter.post("/", async (req, res) => {
   const body = req.body;
 
-  const user = await User.findById(body.userId);
+  // const user = await User.findById(body.userId);
 
   const section = new Section({
     date: body.date,
@@ -19,13 +19,13 @@ sectionsRouter.post("/", async (req, res) => {
       title: body.items.title,
       url: body.items.url,
       wordUnits: body.items.wordUnits
-    },
-    user: user._id
+    }
+    // user: "admin"
   });
 
   const savedSection = await section.save();
-  user.sections = user.sections.comcat(savedSection._id);
-  await user.save();
+  // user.sections = user.sections.concat(savedSection._id);
+  // await user.save();
 
   res.json(savedSection.toJSON());
 });

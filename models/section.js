@@ -12,11 +12,11 @@ const sectionSchema = new mongoose.Schema({
       word: String,
       translation: String
     }
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
   }
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User"
+  // }
 });
 
 sectionSchema.set("toJSON", {

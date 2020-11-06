@@ -48,8 +48,12 @@ dailyLearningStuffRouter.delete("/:id", async (req, res) => {
 
   const recordUnit = await DailyLearningStuff.findOne({ "items._id": id });
 
-  await recordUnit.items.id(id).remove();
-  await recordUnit.save();
+  if (recordUnit.items.length === 1) {
+    recordUnit.remove();
+  } else {
+    await recordUnit.items.id(id).remove();
+    await recordUnit.save();
+  }
 
   res.send("Deleted!");
 });
