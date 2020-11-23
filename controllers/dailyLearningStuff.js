@@ -26,20 +26,15 @@ dailyLearningStuffRouter.post("/", async (req, res) => {
       }
     );
 
-    const TagedStuff = {
-      ...updatedStuff.toJSON(),
-      wasUpdated: true
-    };
-
-    res.json(TagedStuff);
+    res.status(201).json(updatedStuff.toJSON());
   } else {
     const newstuff = new DailyLearningStuff({
       date: body.date,
-      items: body.item
+      items: body.items
     });
 
     const savedStuff = await newstuff.save();
-    res.json(savedStuff.toJSON());
+    res.status(200).json(savedStuff.toJSON());
   }
 });
 
@@ -48,14 +43,17 @@ dailyLearningStuffRouter.delete("/:id", async (req, res) => {
 
   const recordUnit = await DailyLearningStuff.findOne({ "items._id": id });
 
-  if (recordUnit.items.length === 1) {
-    recordUnit.remove();
-  } else {
-    await recordUnit.items.id(id).remove();
-    await recordUnit.save();
+  try {
+    if (recordUnit.items.length === 1) {
+      await recordUnit.remove();
+    } else {
+      await recordUnit.items.id(id).remove();
+      await recordUnit.save();
+    }
+    res.send("Deleted!");
+  } catch (e) {
+    res.send(`Deleted failed,message:${e.message}`);
   }
-
-  res.send("Deleted!");
 });
 
 module.exports = dailyLearningStuffRouter;

@@ -11,7 +11,6 @@ userRouter.post("/login", async (req, res) => {
   const { username } = req.body;
 
   const isUsernameExist = await User.findOne({ username });
-  console.log(isUsernameExist);
 
   isUsernameExist
     ? res.status(200).json(username)

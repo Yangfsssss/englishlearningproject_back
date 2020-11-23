@@ -15,11 +15,13 @@ sectionsRouter.post("/", async (req, res) => {
 
   const section = new Section({
     date: body.date,
-    items: {
-      title: body.items.title,
-      url: body.items.url,
-      wordUnits: body.items.wordUnits
-    }
+    items: [
+      {
+        title: body.items.title,
+        url: body.items.url,
+        wordUnits: body.items.wordUnits
+      }
+    ]
     // user: "admin"
   });
 
