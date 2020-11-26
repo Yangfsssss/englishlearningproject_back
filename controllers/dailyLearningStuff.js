@@ -30,7 +30,7 @@ dailyLearningStuffRouter.post("/", async (req, res) => {
   } else {
     const newstuff = new DailyLearningStuff({
       date: body.date,
-      items: body.items
+      items: [body.item]
     });
 
     const savedStuff = await newstuff.save();
@@ -50,9 +50,9 @@ dailyLearningStuffRouter.delete("/:id", async (req, res) => {
       await recordUnit.items.id(id).remove();
       await recordUnit.save();
     }
-    res.send("Deleted!");
+    res.status(200).json();
   } catch (e) {
-    res.send(`Deleted failed,message:${e.message}`);
+    res.status(400).json();
   }
 });
 
