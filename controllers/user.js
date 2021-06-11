@@ -28,7 +28,11 @@ userRouter.post("/signup", async (req, res) => {
     // passwordHash
   });
 
+  console.log(user);
+
   const savedUser = await user.save();
+
+  console.log(savedUser);
 
   res.status(200).json(savedUser);
 });
